@@ -7,7 +7,7 @@ export default function LoginForm(){
     const authHandler = async (datos) => {
         const auth = new AuthService();
         const response = await auth.login(datos.email, datos.password);
-        if(response === 200){
+        if(response !== undefined){
             window.location.href = "/home";
         }
     }
@@ -30,10 +30,12 @@ export default function LoginForm(){
     }
 
     return(
-        <FormControl className="formLogin" sx={{ '& .MuiTextField-root': { m: 1 }, '& button': { m: 1, height: '3rem' }}}>
-            <TextField id="email" type="email" label="Email" variant="outlined" name="email" onChange={handleInputChange} />
-            <TextField id="password" type="password" label="Password" variant="outlined" name="password" onChange={handleInputChange} />
-            <Button variant="contained" type="submit" color="primary" onClick={enviarDatos}>Login</Button>
-        </FormControl>
+        <form className="formLogin" onSubmit={enviarDatos}>
+            <FormControl className="formControlLogin" sx={{ '& .MuiTextField-root': { m: 1 }, '& button': { m: 1, height: '3rem' }}}>
+                <TextField id="email" type="email" label="Email" variant="outlined" name="email" onChange={handleInputChange} />
+                <TextField id="password" type="password" label="Password" variant="outlined" name="password" onChange={handleInputChange} />
+                <Button variant="contained" type="submit" color="primary">Login</Button>
+            </FormControl>
+        </form>
     )
 }

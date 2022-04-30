@@ -11,7 +11,7 @@ export default class AuthService {
 
   login(email, password) {
     // Get a token from api server using the fetch api
-    return this.fetch(`http://192.168.1.69:8080/api/login`, {
+    return this.fetch(`http://66.70.178.146:8001/api/login`, {
       method: "POST",
       cors: "no-cors",
       body: JSON.stringify({
@@ -20,7 +20,6 @@ export default class AuthService {
       })
     }).then(res => {
       this.setToken(res.token); // Setting the token in localStorage
-      res.status = 200;
       return Promise.resolve(res);
     });
   }

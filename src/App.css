@@ -1,6 +1,7 @@
-/*
-    LOGIN STYLE
-*/
+/**
+* Login Style
+**/
+
 .loginGrid{
     min-width: 100vw;
     min-height: 100vh;
@@ -25,6 +26,10 @@
 
 .formLogin{
     width: 70%;
+}
+
+.formControlLogin{
+    width: 100%;
 }
 
 .rightLoginGrid img{
@@ -73,4 +78,37 @@
     color: #167db7;
     text-decoration: none;
     outline: none;
+}
+
+/**
+* Home Style
+**/
+
+.homeBody{
+    min-width: 100vw;
+    min-height: 100vh;
+    background: #f3f3f3;
+}
+
+.homeOfferCardJobs{
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+}
+
+/**
+* Card Style
+**/
+
+.cardAvatar{
+    background-color: #f3f3f3;
+}
+
+.cardTitle{
+    color: #167db7;
+}
+
+.cardDescription{
+    color: #828282;
+    font-size: 0.8rem;
 }
