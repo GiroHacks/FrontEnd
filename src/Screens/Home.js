@@ -37,18 +37,38 @@ const style2 = {
     alignItems:"center"
 };
 
+const style3 = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: "60%",
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+    display:"flex",
+    flexDirection:"column",
+    justifyContent:"center",
+    alignItems:"center"
+};
+
 
 export default function HomeScreen(){
     const [list, setList] = useState([]);
     const [myName] = useState(Auth.userNameFromToken())
     const [mySkills,setMySkills] = useState([])
+    const [myJobs,setMyJobs] = useState([])
     const [open, setOpen] = useState(false);
     const [open2, setOpen2] = useState(false);
+    const [open3, setOpen3] = useState(false);
     const [selectedImage, setSelectedImage] = useState(undefined)
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const handleOpen2 = () => setOpen2(true);
     const handleClose2 = () => setOpen2(false);
+    const handleOpen3 = () => setOpen3(true);
+    const handleClose3 = () => setOpen3(false);
     const [updateToggle,setUpdateToggle] = useState(false)
     const [skillsOptions, setSkillsOptions] = useState([])
 
@@ -66,7 +86,6 @@ export default function HomeScreen(){
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        console.log("Hola")
         axios.get("http://100.89.34.13:8080/api/offers", {
             headers: {
                 Authorization: localStorage.getItem("id_token"),
@@ -88,7 +107,7 @@ export default function HomeScreen(){
     const renderCards = () => {
         if (list.length > 0) {
             return list.map(offer => {
-                return <CardJob key={offer.id} func={renderInfoCards(offer)} offer={offer}/>;
+                return <CardJob key={offer.id} func={renderInfoCards(offer)} click={modalForJob(offer)} offer={offer}/>;
             });
         }else{
             return <div>No hay ofertas disponibles para tu perfil</div>;
@@ -98,6 +117,13 @@ export default function HomeScreen(){
     const renderInfoCards = (_offer) => {
         return () => {
             setInfo(list.find(offer => offer.id === _offer.id));
+        }
+    };
+
+    const modalForJob = (_offer) => {
+        return () => {
+            setMyJobs(_offer);
+            setOpen3(true);
         }
     };
 
@@ -159,7 +185,7 @@ export default function HomeScreen(){
                 <Grid item xs={12} lg={4} className="homeOfferCardJobs">
                     {renderCards()}
                 </Grid>
-                <Grid item xs={12} lg={5} className="homeOfferCardJobs">
+                <Grid id="info" item xs={12} lg={5} className="homeOfferCardJobs">
                     {info.id ? <CardInfo offer={info}/> : <div>No hay ofertas disponibles para tu perfil</div>}
                 </Grid>
                 <Grid item xs={12} lg={3} style={{ overflowY: "auto", maxHeight: "calc(100vh - 5rem)", flexDirection:"column", justifyContent:"space-between",padding: "1rem 1rem 1.5rem 1rem"}}>
@@ -250,6 +276,22 @@ export default function HomeScreen(){
                     <input style={{fontSize:"1.5em"}} type="file" accept="image/jpeg" onChange={imageChange}></input>
                     <Button onClick={updateSkills} style={{marginTop:"20px"}} size="large" variant="contained">SAVE</Button>
                 </Box>
+            </Modal>
+
+            <Modal
+            open={open3}
+            onClose={handleClose3}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+            >
+            <Box sx={style3}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                {myJobs.job_title}
+                </Typography>
+                <Typography id="modal-modal-description" className="modalDescription" sx={{ mt: 2 }}>
+                {myJobs.description}
+                </Typography>
+            </Box>
             </Modal>
         </React.Fragment>
     )

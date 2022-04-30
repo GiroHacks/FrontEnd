@@ -155,7 +155,6 @@
 **/
 
 body{
-  width: 100vw;
   height: 100vh;
   background: #f3f3f3;
 }
@@ -223,4 +222,25 @@ body{
 .cardInfoDescription{
   margin-top: 1.5rem;
   text-align: justify;
+}
+
+@media screen and (max-width: 768px) {
+  #info{
+    display: none;
+  }
+
+  .modalDescription{
+    overflow: auto;
+    max-height: 50vh;
+  }
+
+  .homeOfferCardJobs, .MuiGrid-root{
+    overflow: hidden !important;
+    max-height: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .homeOfferCardJobs{
+    padding: 0.5rem;
+  }
 }
