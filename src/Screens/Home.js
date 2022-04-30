@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import { Grid,Card,CardContent,CardActions,Button,Modal,Box,Typography } from "@mui/material";
-import { Avatar } from "@mui/material";
 import CardJob from "../Components/CardJob";
 import HomeAppBar from "../Components/HomeAppBar";
 import axios from "axios";
@@ -25,20 +24,16 @@ const style = {
 
 export default function HomeScreen(){
     const [list, setList] = useState([]);
-    const [myName,setMyName] = useState(Auth.userNameFromToken())
+    const [myName] = useState(Auth.userNameFromToken())
     const [mySkills,setMySkills] = useState(null)
-    const [buttonClicked,setButtonClicked] = useState(false)
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const openModal = async ()=>{
-        let res = await axios("https://83a6-147-83-201-132.eu.ngrok.io/api/users/me/skills", {
-            method: 'GET',
-            mode: 'no-cors',
+    const openModal = async () => {
+        let res = await axios.get("http://100.89.34.13:8080/api/users/me/skills", {
             headers: {
-              'Access-Control-Allow-Origin': '*',
-              'Content-Type': 'application/json',
+                Authorization: localStorage.getItem("id_token"),
             }
         })
         setMySkills(res.data)
@@ -49,7 +44,11 @@ export default function HomeScreen(){
     const [loading, setLoading] = useState(false);
 
     useState(() => {
-        axios.get("http://100.89.34.13:8080/api/offers")
+        axios.get("http://100.89.34.13:8080/api/offers", {
+            headers: {
+                Authorization: localStorage.getItem("id_token"),
+            }
+        })
             .then(res => {
                 setList(res.data);
                 if (loading === false && res.data.length > 0) {
@@ -87,20 +86,20 @@ export default function HomeScreen(){
                 <Grid item xs={12} lg={4} className="homeOfferCardJobs">
                     {renderCards()}
                 </Grid>
-                <Grid item xs={12} sm={6} lg={6} className="homeOfferCardJobs">
+                <Grid item xs={12} sm={6} lg={5} className="homeOfferCardJobs">
                     {info.id ? <CardInfo offer={info}/> : <div>No hay ofertas disponibles para tu perfil</div>}
                 </Grid>
-                <Grid item xs={12} lg={2} style={{display:"flex",flexDirection:"column",justifyContent:"space-between",padding: "1rem 1rem 1.5rem 1rem"}}>
-                    <Card sx={{ minWidth: 275}}>
+                <Grid item xs={12} lg={3} style={{display:"flex",flexDirection:"column",justifyContent:"space-between",padding: "1rem 1rem 1.5rem 1rem", marginTop: '0.4rem'}}>
+                    <Card>
                         <CardContent style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
-                            <img style={{width:"50%",borderRadius:"50%"}} src="https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max"></img>
+                            <img style={{width:"50%",borderRadius:"50%"}} alt="profile" src="https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max"></img>
                             <Typography variant="h4" >{myName}</Typography>
                         </CardContent>
                         <CardActions style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
                             <Button onClick={openModal} size="large">Edit my skills</Button>
                         </CardActions>
                     </Card>
-                    <Card sx={{ minWidth: 275,marginTop:"40px"}}>
+                    <Card sx={{ marginTop:"40px"}}>
                         <CardContent style={{display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
                             <h2>Your most wanted skills</h2>
                             <div style={{display:"flex",flexDirection:"column",justifyContent:"space-between", width:"100%"}}>
@@ -119,7 +118,7 @@ export default function HomeScreen(){
                             </div>
                         </CardContent>
                     </Card>
-                    <Card sx={{ minWidth: 275,marginTop:"40px"}}>
+                    <Card sx={{ marginTop:"40px"}}>
                         <CardContent style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
                             <h2 style={{textAlign:"center"}}>What should I learn or improve ?</h2>
                             <AutoGraph fontSize="large"/>

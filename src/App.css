@@ -164,7 +164,7 @@
     padding: 1rem 1rem 1.5rem 1rem;
     max-width: 100%;
     max-height: calc(100vh - 5rem);
-    overflow-y: scroll;
+    overflow-y: auto;
     margin-top: 0.5rem !important;
 }
 
@@ -187,6 +187,15 @@
     color: #167db7;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-decoration: none;
+}
+
+.cardTitle:hover{
+    text-decoration: underline;
+}
+
+.cardInfoContainer{
+  align-items: center;
 }
 
 .cardDescription{
@@ -196,4 +205,10 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    text-align: justify;
+}
+
+.cardInfoDescription{
+  margin-top: 1.5rem;
+  text-align: justify;
 }

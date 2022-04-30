@@ -12,13 +12,20 @@ export default function CardInfo(props){
                 <React.Fragment>
                     <CardContent>
                         <Grid container>
-                            <Grid container>
+                            <Grid container className="cardInfoContainer">
                                 <Grid item xs={12} lg={2}>
                                     <Avatar src={cardAvatarDefault} variant="rounded"/>
                                 </Grid>
                                 <Grid item xs={12} lg={10}>
                                     <span>{offer.job_title}</span><br></br>
+                                </Grid>
+                                <Grid item xs={12} className="cardInfoDescription">
+                                    <h3>Descripción:</h3>
                                     <span>{offer.description}</span>
+                                </Grid>
+                                <Grid item xs={12} className="cardInfoDescription">
+                                    <h3>Requisitos:</h3>
+                                    <span>{offer.requirements}</span>
                                 </Grid>
                             </Grid>
                             <Grid container>
