@@ -1,0 +1,70 @@
+.parentGrid{
+  height: 100vh;
+}
+.leftGridItem{
+  background-color: #167db7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.rightGridItem{
+  
+}
+.contentDiv{
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.rightImage{
+  width: 70%;
+}
+.appBar{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.appBarContainer{
+  width: 95%;
+  display: flex;
+}
+
+.formContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+}
+
+.horizontalFlex{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.stepperBox{
+  display: flex;
+  flex-direction: column;
+  height: 20vh;
+  margin-top: 30px;
+}
+
+.horizontalFlexEnd{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+@media (max-width: 1200px) {
+  .appBar{
+    position: relative !important;
+  }
+}
