@@ -81,7 +81,6 @@ export default function HomeScreen(){
     };
 
     return(
-
         <React.Fragment>
             <HomeAppBar/>
             <Grid container style={{padding:"20px"}}>

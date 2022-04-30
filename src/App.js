@@ -20,9 +20,8 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Routes>
-          <Route path="/" element={<PrivateRoute />}>
-            <Route path="/home" element={<HomeScreen />} />
-          </Route>
+          <Route path="/" element={<PrivateRoute />}/>
+          <Route path="/home" element={<HomeScreen />}/>
           <Route exact path='/login' element={<LoginScreen/>}/>
           <Route exact path='/register' element={<RegisterScreen/>}/>
         </Routes>
