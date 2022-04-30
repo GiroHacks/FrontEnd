@@ -16,7 +16,7 @@ export default function CardInfo(props){
                                     <Avatar src={cardAvatarDefault} variant="rounded"/>
                                 </Grid>
                                 <Grid item xs={12} lg={10}>
-                                    <span>{offer.job_title}</span><br></br>
+                                    <h3>{offer.job_title}</h3><br></br>
                                 </Grid>
                                 <Grid item xs={12} className="cardInfoDescription">
                                     <h3>Descripción:</h3>

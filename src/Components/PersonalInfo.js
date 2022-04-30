@@ -20,7 +20,7 @@ export default function PersonalInfo(props){
         setSubmited(true)
         if(firstName!=="" && lastName!=="" && email!=="" && phoneNum!=="" && birthDate!==undefined){
             try{
-                let res = await axios.post("http://66.70.178.146:8001/api/checkemail",{"email":email})
+                let res = await axios.post("http://100.89.34.13:8080/api/checkemail",{"email":email})
                 if(res.status===200){
                     setEmailExists(false)
                     const userObject={

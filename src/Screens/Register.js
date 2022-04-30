@@ -23,7 +23,6 @@ export default function RegisterScreen(){
     const [stepCount,setStepCount] = useState(0);
     const [registerUser,setUserRegister] = useState(null)
     const [userSkills,setUserSkills] = useState(null)
-    const [setUnexpectedError] = useState(false)
 
     const increaseStepCount = () =>{
         setStepCount(stepCount+1)
@@ -39,11 +38,10 @@ export default function RegisterScreen(){
             "skills":userSkills
         }
         try{
-            let res = await axios.post("https://83a6-147-83-201-132.eu.ngrok.io/api/register",postUser)
+            let res = await axios.post("http://100.89.34.13:8080/api/register",postUser)
             if(res.status===200){
-                setUnexpectedError(false)
+                window.location("/login")
             }else{
-                setUnexpectedError(true)
                 Swal.fire({
                     position: 'bottom-end',
                     icon: 'error',
@@ -53,7 +51,6 @@ export default function RegisterScreen(){
                 })
             }
         }catch(e){
-            setUnexpectedError(true)
             Swal.fire({
                 position: 'bottom-end',
                 icon: 'error',
