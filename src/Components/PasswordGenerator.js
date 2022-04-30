@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TextField,IconButton,Button,Alert,AlertTitle } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
+import Swal from "sweetalert2";
 
 export default function PasswordGenerator(props){
 
@@ -17,6 +18,13 @@ export default function PasswordGenerator(props){
         }
         else{
             setPasswordsMatch(false)
+            Swal.fire({
+                position: 'bottom-end',
+                icon: 'error',
+                title: "Paswords doesn't match!",
+                showConfirmButton: false,
+                timer: 1500
+            })
         }
     }
 
@@ -28,10 +36,6 @@ export default function PasswordGenerator(props){
             <div className="horizontalFlexEnd" style={{marginTop:"30px"}}>
                 <Button variant="contained" onClick={sendDataAndSubmit}>SUBMIT</Button>
             </div>
-            <Alert severity="error" style={passwordsMatch?{display:"none"}:{display:"block",width:"60%"}}>
-                <AlertTitle>Error</AlertTitle>
-                Passwords doesn't match !
-            </Alert>
             
         </div>
     )

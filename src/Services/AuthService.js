@@ -42,6 +42,12 @@ export default class AuthService {
     }
   }
 
+  userNameFromToken(){
+    const token = localStorage.getItem("id_token");
+    const decoded = decode(token)
+    return decoded.first_name
+  }
+
   setToken(idToken) {
     // Saves user token to localStorage
     localStorage.setItem("id_token", idToken);

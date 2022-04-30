@@ -3,6 +3,7 @@ import { ArrowForward } from "@mui/icons-material";
 import React from "react";
 import { useState } from "react";
 import axios from 'axios';
+import Swal from "sweetalert2";
 
 
 export default function PersonalInfo(props){
@@ -32,9 +33,25 @@ export default function PersonalInfo(props){
                     props.sendData(userObject)
                     props.increase()
                 }
-                else setEmailExists(true)
+                else{
+                    setEmailExists(true)
+                    Swal.fire({
+                        position: 'bottom-end',
+                        icon: 'error',
+                        title: 'This email already exist!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                } 
             }catch(e){
                 setEmailExists(true)
+                Swal.fire({
+                    position: 'bottom-end',
+                    icon: 'error',
+                    title: 'This email already exist!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             }
         }
     }
@@ -56,10 +73,6 @@ export default function PersonalInfo(props){
                     <ArrowForward fontSize="inherit" />
                 </IconButton>
             </div>
-            <Alert severity="error" style={!emailExists?{display:"none"}:{display:"block",width:"60%"}}>
-                <AlertTitle>Error</AlertTitle>
-                This email already exists !
-            </Alert>
         </div>
     )
 }
