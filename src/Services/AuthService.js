@@ -11,7 +11,7 @@ export default class AuthService {
 
   login(email, password) {
     // Get a token from api server using the fetch api
-    return this.fetch(`http://66.70.178.146:8001/api/login`, {
+    return this.fetch(`https://83a6-147-83-201-132.eu.ngrok.io/api/login`, {
       method: "POST",
       cors: "no-cors",
       body: JSON.stringify({
