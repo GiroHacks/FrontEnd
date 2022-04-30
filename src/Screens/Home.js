@@ -82,14 +82,14 @@ export default function HomeScreen(){
     return(
         <React.Fragment>
             <HomeAppBar/>
-            <Grid container style={{padding:"20px"}}>
+            <Grid container style={{background: "#f3f3f3", minWidth: "100%", minHeight: "100%"}}>
                 <Grid item xs={12} lg={4} className="homeOfferCardJobs">
                     {renderCards()}
                 </Grid>
-                <Grid item xs={12} sm={6} lg={5} className="homeOfferCardJobs">
+                <Grid item xs={12} lg={5} className="homeOfferCardJobs">
                     {info.id ? <CardInfo offer={info}/> : <div>No hay ofertas disponibles para tu perfil</div>}
                 </Grid>
-                <Grid item xs={12} lg={3} style={{display:"flex",flexDirection:"column",justifyContent:"space-between",padding: "1rem 1rem 1.5rem 1rem", marginTop: '0.4rem'}}>
+                <Grid item xs={12} lg={3} style={{ overflowY: "auto", maxHeight: "calc(100vh - 5rem)", flexDirection:"column", justifyContent:"space-between",padding: "1rem 1rem 1.5rem 1rem"}}>
                     <Card>
                         <CardContent style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
                             <img style={{width:"50%",borderRadius:"50%"}} alt="profile" src="https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max"></img>

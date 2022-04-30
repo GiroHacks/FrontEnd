@@ -96,7 +96,7 @@ export default function PrimarySearchAppBar() {
               aria-label="show 17 new notifications"
               sx={{ color: '#a7a7a7' }}
             >
-              <Badge badgeContent={17} color="error">
+              <Badge badgeContent={1} color="error">
                 <NotificationsIcon />
               </Badge>
             </IconButton>

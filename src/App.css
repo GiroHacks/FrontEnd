@@ -151,13 +151,22 @@
 }
 
 /**
+* Body Style
+**/
+
+body{
+  width: 100vw;
+  height: 100vh;
+  background: #f3f3f3;
+}
+
+/**
 * Home Style
 **/
 
 .homeBody{
     width: 100%;
     min-height: 100vh;
-    background: #f3f3f3;
 }
 
 .homeOfferCardJobs{
@@ -165,7 +174,6 @@
     max-width: 100%;
     max-height: calc(100vh - 5rem);
     overflow-y: auto;
-    margin-top: 0.5rem !important;
 }
 
 /**

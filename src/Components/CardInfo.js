@@ -5,7 +5,6 @@ import cardAvatarDefault from '../img/card_avatar_default.png';
 
 export default function CardInfo(props){
     const {offer} = props;
-    console.log({offer: offer});
     return(
         <Box>
             <Card variant="outlined">
@@ -23,10 +22,18 @@ export default function CardInfo(props){
                                     <h3>Descripción:</h3>
                                     <span>{offer.description}</span>
                                 </Grid>
-                                <Grid item xs={12} className="cardInfoDescription">
-                                    <h3>Requisitos:</h3>
-                                    <span>{offer.requirements}</span>
-                                </Grid>
+                                {(offer.requirements !== undefined) &&(
+                                    <Grid item xs={12} className="cardInfoDescription">
+                                        <h3>Requisitos:</h3>
+                                        <span>{offer.requirements}</span>
+                                    </Grid>
+                                )}
+                                {(offer.min_salary !== undefined) && (offer.max_salary !== undefined) && (
+                                    <Grid item xs={12} className="cardInfoDescription">
+                                        <h3>Salario:</h3>
+                                        <span>{offer.min_salary}€ - {offer.max_salary}€</span>
+                                    </Grid>
+                                )}
                             </Grid>
                             <Grid container>
                                 <Grid item xs={12} lg={2}>
