@@ -13,23 +13,6 @@ import { Logout, ModeEdit } from '@mui/icons-material';
 export const Auth = new AuthService();
 
 export default function PrimarySearchAppBar() {
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  
-
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
 
   const logoutAndExit = async ()=>{
     let response = await Swal.fire({
@@ -44,45 +27,7 @@ export default function PrimarySearchAppBar() {
       Auth.logout()
       window.location="/"
     }
-
-    
   }
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem onClick={handleClose}>
-        <ListItemIcon>
-          <ModeEdit fontSize="small" />
-        </ListItemIcon>
-        <ListItemText>My Profile</ListItemText>
-      </MenuItem>
-      <MenuItem onClick={logoutAndExit}>
-        <ListItemIcon>
-          <Logout fontSize="small" />
-        </ListItemIcon>
-        <ListItemText>Logout</ListItemText>
-      </MenuItem>
-    </Menu>
-  );
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -105,33 +50,11 @@ export default function PrimarySearchAppBar() {
               edge="end"
               aria-label="account of current user"
               aria-haspopup="true"
-              sx={{ color: '#a7a7a7' }}
-              onClick={handleClick}
+              sx={{ color: '#d32f2f' }}
+              onClick={logoutAndExit}
             >
-              <AccountCircle />
+              <Logout/>
             </IconButton>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                'aria-labelledby': 'basic-button',
-              }}
-            >
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <ModeEdit fontSize="small" />
-                </ListItemIcon>
-                <ListItemText>My Profile</ListItemText>
-              </MenuItem>
-              <MenuItem onClick={logoutAndExit}>
-                <ListItemIcon>
-                  <Logout fontSize="small" />
-                </ListItemIcon>
-                <ListItemText>Logout</ListItemText>
-              </MenuItem>
-            </Menu>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -148,16 +71,15 @@ export default function PrimarySearchAppBar() {
               edge="end"
               aria-label="account of current user"
               aria-haspopup="true"
-              sx={{ color: '#a7a7a7' }}
-              onClick={handleClick}
+              sx={{ color: '#d32f2f' }}
+              onClick={logoutAndExit}
             >
-              <AccountCircle />
+              <Logout/>
             </IconButton>
         
           </Box>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
     </Box>
   );
 }

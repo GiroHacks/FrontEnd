@@ -2,8 +2,6 @@ import React from "react";
 import {Box, Card, CardContent, Avatar, Grid} from '@mui/material';
 import cardAvatarDefault from '../img/card_avatar_default.png';
 
-// /api/users/offers/id
-
 export default function CardJob(props){
     const {offer} = props;
     return (
