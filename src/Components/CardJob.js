@@ -15,7 +15,12 @@ export default function CardJob(props){
                             <Avatar src={cardAvatarDefault} variant="rounded"/>
                         </Grid>
                         <Grid item xs={10}>
-                            <a href="#" onClick={props.func} className="cardTitle">{offer.job_title}</a><br></br>
+                            {(window.innerWidth >= 768) && (
+                                <a href="#" onClick={props.func} className="cardTitle">{offer.job_title}</a>)}
+                            {(window.innerWidth < 768) && (
+                                <a href="#" onClick={props.click} className="cardTitle">{offer.job_title}</a>
+                            )}
+                            <br></br>
                             <span className="cardDescription">{offer.description}</span>
                         </Grid>
                         </Grid>
