@@ -9,6 +9,7 @@ import PersonalInfo from "../Components/PersonalInfo";
 import Aptitudes from "../Components/Aptitudes";
 import PasswordGenerator from "../Components/PasswordGenerator";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 
 const steps = [
@@ -38,15 +39,29 @@ export default function RegisterScreen(){
             "skills":userSkills
         }
         try{
-            let res = await axios.post("http://66.70.178.146:8001/api/register",postUser)
+            let res = await axios.post("https://83a6-147-83-201-132.eu.ngrok.io/api/register",postUser)
             if(res.status===200){
                 setUnexpectedError(false)
                 console.log("user posted")
             }else{
                 setUnexpectedError(true)
+                Swal.fire({
+                    position: 'bottom-end',
+                    icon: 'error',
+                    title: 'Unexpected server error!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             }
         }catch(e){
             setUnexpectedError(true)
+            Swal.fire({
+                position: 'bottom-end',
+                icon: 'error',
+                title: 'Unexpected server error!',
+                showConfirmButton: false,
+                timer: 1500
+            })
         }
     }
     const handleUserPersonalData=(personalData)=>{
@@ -84,10 +99,6 @@ export default function RegisterScreen(){
                             )
                             
                         }
-                        <Alert severity="error" style={!unexpectedError?{display:"none"}:{display:"block",width:"45%"}}>
-                            <AlertTitle>Error</AlertTitle>
-                            Some unexpected error ocurred on our server!
-                        </Alert>
                     </div>
                     
                 </Grid>
