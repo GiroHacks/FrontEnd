@@ -126,7 +126,7 @@ export default function HomeScreen(){
                             </Card>
                     </Box>
                 </Grid>
-                <Grid item xs={12} lg={2} style={{display:"flex",flexDirection:"column",justifyContent:"space-between",padding: "1rem 1rem 1.5rem 1rem"}}>
+                <Grid item xs={12} lg={2} style={{display:"flex",flexDirection:"column",justifyContent:"space-between",padding: "1rem 1rem 1.5rem 1rem",height:"90vh"}}>
                     <Card sx={{ minWidth: 275}}>
                         <CardContent style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
                             <img style={{width:"50%",borderRadius:"50%"}} src="https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max"></img>
