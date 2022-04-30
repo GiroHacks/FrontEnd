@@ -3,7 +3,9 @@ import React from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import LoginScreen from './Screens/Login';
 import RegisterScreen from './Screens/Register';
+import HomeScreen from './Screens/Home';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import PrivateRoute from "./PrivateRoute";
 
 const theme = createTheme({
   palette: {
@@ -18,8 +20,11 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Routes>
-          <Route exact path='/login' element={<LoginScreen/>}></Route>
-          <Route exact path='/register' element={<RegisterScreen/>}></Route>
+          <Route path="/" element={<PrivateRoute />}>
+            <Route path="/home" element={<HomeScreen />} />
+          </Route>
+          <Route exact path='/login' element={<LoginScreen/>}/>
+          <Route exact path='/register' element={<RegisterScreen/>}/>
         </Routes>
       </Router>
     </ThemeProvider>
