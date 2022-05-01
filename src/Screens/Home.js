@@ -83,7 +83,6 @@ export default function HomeScreen(){
     }
 
     const [info, setInfo] = useState([]);
-    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         axios.get("http://100.89.34.13:8080/api/offers", {
@@ -92,9 +91,8 @@ export default function HomeScreen(){
             }
         }).then(res => {
             setList(res.data);
-            if (loading === false && res.data.length > 0) {
+            if (res.data.length > 0) {
                 setInfo(res.data[0]);
-                setLoading(true);
             }
         })
         .catch(err => {
