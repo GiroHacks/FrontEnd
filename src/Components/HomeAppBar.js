@@ -33,7 +33,7 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ background: '#FFF' }}>
         <Toolbar>
-          <img src={Logo} alt="logo" width="50" height="50" />
+          <img className='smallLogo' onClick={()=>window.location="/"} src={Logo} alt="logo" width="50" height="50" />
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton

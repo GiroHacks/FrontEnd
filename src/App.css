@@ -150,6 +150,9 @@
     outline: none;
 }
 
+.smallLogo:hover{
+  cursor: pointer;
+}
 /**
 * Body Style
 **/

@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
-import { Grid,Card,CardContent,CardActions,Button,Modal,Box,Typography,Autocomplete,TextField,Input } from "@mui/material";
+import { Grid,Card,CardContent,CardActions,Button,Modal,Box,Typography,Autocomplete,TextField,Link } from "@mui/material";
 import CardJob from "../Components/CardJob";
 import HomeAppBar from "../Components/HomeAppBar";
 import axios from "axios";
@@ -56,6 +56,7 @@ const style3 = {
 
 export default function HomeScreen(){
     const [list, setList] = useState([]);
+    const [top, setTop] = useState([]);
     const [myName] = useState(Auth.userNameFromToken())
     const [mySkills,setMySkills] = useState([])
     const [myJobs,setMyJobs] = useState([])
@@ -71,6 +72,7 @@ export default function HomeScreen(){
     const handleClose3 = () => setOpen3(false);
     const [updateToggle,setUpdateToggle] = useState(false)
     const [skillsOptions, setSkillsOptions] = useState([])
+    const [myJobDescription,setJobDescription] = useState("")
 
     const openModal = async () => {
         let res = await axios.get("http://100.89.34.13:8080/api/users/me/skills", {
@@ -84,16 +86,30 @@ export default function HomeScreen(){
 
     const [info, setInfo] = useState([]);
     const [loading, setLoading] = useState(false);
+    
+    useEffect(()=>{
+        axios.get("http://100.89.34.13:8080/api/users/me/jobprofile",{
+            headers: {
+                Authorization: localStorage.getItem("id_token"),
+            }
+        }).then(res=>{
+            setJobDescription(res.data[0])
+
+        }).catch(err=>{
+            console.log(err)
+        })
+    },[])
 
     useEffect(() => {
-        axios.get("http://100.89.34.13:8080/api/offers", {
+       axios.get("http://100.89.34.13:8080/api/offers", {
             headers: {
                 Authorization: localStorage.getItem("id_token"),
             }
         }).then(res => {
-            setList(res.data);
-            if (loading === false && res.data.length > 0) {
-                setInfo(res.data[0]);
+            setList(res.data.offers);
+            setTop(res.data.top);
+            if (loading === false && res.data.offers.length > 0) {
+                setInfo(res.data.offers[0]);
                 setLoading(true);
             }
         })
@@ -193,6 +209,7 @@ export default function HomeScreen(){
                         <CardContent style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
                             <img className="profileImage" onClick={handleOpen2} style={{width:"50%",borderRadius:"50%"}} alt="profile" src={"http://100.89.34.13:8080/api/users/"+Auth.idFromToken()+"/image"}></img>
                             <Typography variant="h4" >{myName}</Typography>
+                            <Typography variant="h6" >{myJobDescription}</Typography>
                         </CardContent>
                         <CardActions style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
                             <Button onClick={openModal} size="large">Edit my skills</Button>
@@ -201,18 +218,18 @@ export default function HomeScreen(){
                     <Card sx={{ marginTop:"40px"}}>
                         <CardContent style={{display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
                             <h2>Your most wanted skills</h2>
-                            <div style={{display:"flex",flexDirection:"column",justifyContent:"space-between", width:"100%"}}>
-                                <p>REACT.js</p>
-                                <div style={{width:"80%",height:"20px",borderRadius:"20px",backgroundColor:"lightgray"}}>
-                                    <div style={{width:"80%",height:"20px",backgroundColor:"#167db7",borderRadius:"20px"}}/>
+                            <div style={{display:"flex",flexDirection:"row",justifyContent:"center",alignItems:"flex-end", width:"80%"}}>
+                                <div style={{display:"flex",flexDirection:"column",width:"33%"}}>
+                                    <Typography sx={{textAlign:"center"}} variant="h6">{top.length>=2?top[1]:""}</Typography>
+                                    <div style={{backgroundColor:"#c1c1c1",height:"7vh",width:"100%",display:"flex",justifyContent:"center",alignItems:"center",fontWeight:"bold"}}>2º</div>
                                 </div>
-                                <p>JAVA</p>
-                                <div style={{width:"80%",height:"20px",borderRadius:"20px",backgroundColor:"lightgray"}}>
-                                    <div style={{width:"70%",height:"20px",backgroundColor:"#167db7",borderRadius:"20px"}}/>
+                                <div style={{display:"flex",flexDirection:"column",width:"33%"}}>
+                                    <Typography sx={{textAlign:"center"}} variant="h6">{top.length>=1?top[0]:""}</Typography>
+                                    <div style={{backgroundColor:"#c1c1c1",height:"10vh",width:"100%",display:"flex",justifyContent:"center",alignItems:"center",fontWeight:"bold"}}>1º</div>
                                 </div>
-                                <p>mySQL</p>
-                                <div style={{width:"80%",height:"20px",borderRadius:"20px",backgroundColor:"lightgray"}}>
-                                    <div style={{width:"50%",height:"20px",backgroundColor:"#167db7",borderRadius:"20px"}}/>
+                                <div style={{display:"flex",flexDirection:"column",width:"33%"}}>
+                                    <Typography sx={{textAlign:"center"}} variant="h6">{top.length>=3?top[2]:""}</Typography>
+                                    <div style={{backgroundColor:"#c1c1c1",height:"5vh",width:"100%",display:"flex",justifyContent:"center",alignItems:"center",fontWeight:"bold"}}>3º</div>
                                 </div>
                             </div>
                         </CardContent>
@@ -223,7 +240,7 @@ export default function HomeScreen(){
                             <AutoGraph fontSize="large"/>
                         </CardContent>
                         <CardActions style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-                            <Button size="large">See more</Button>
+                            <Button size="large" onClick={()=>window.location = "/dashboard"}>See more</Button>
                         </CardActions>
                     </Card>
                 </Grid>
@@ -273,8 +290,7 @@ export default function HomeScreen(){
                         Edit your image
                     </Typography>
                     <img style={{width:"20%",borderRadius:"50%",marginTop:"10px"}} alt="profile" src={"http://100.89.34.13:8080/api/users/"+Auth.idFromToken()+"/image"}></img>
-                    <input style={{fontSize:"1.5em"}} type="file" accept="image/jpeg" onChange={imageChange}></input>
-                    <Button onClick={updateSkills} style={{marginTop:"20px"}} size="large" variant="contained">SAVE</Button>
+                    <input style={{fontSize:"1em"}} type="file" accept="image/jpeg" onChange={imageChange}></input>
                 </Box>
             </Modal>
 

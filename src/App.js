@@ -6,6 +6,7 @@ import RegisterScreen from './Screens/Register';
 import HomeScreen from './Screens/Home';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import PrivateRoute from "./PrivateRoute";
+import Dashboard from './Screens/Dashboard';
 
 const theme = createTheme({
   palette: {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/home" element={<HomeScreen />}/>
           <Route exact path='/login' element={<LoginScreen/>}/>
           <Route exact path='/register' element={<RegisterScreen/>}/>
+          <Route exact path='/dashboard' element={<Dashboard/>}/>
         </Routes>
       </Router>
     </ThemeProvider>
