@@ -106,11 +106,12 @@ export default function HomeScreen(){
                 Authorization: localStorage.getItem("id_token"),
             }
         }).then(res => {
+
             setList(res.data.offers);
             setTop(res.data.top);
-            if (loading === false && res.data.offers.length > 0) {
+            if (res.data.offers.length > 0) {
                 setInfo(res.data.offers[0]);
-                setLoading(true);
+
             }
         })
         .catch(err => {
